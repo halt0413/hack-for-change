@@ -1,0 +1,17 @@
+{
+  "name": "hack-for-change",
+  "private": true,
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.19.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build"
+  },
+  "devDependencies": {
+    "turbo": "^2.6.1"
+  }
+}
