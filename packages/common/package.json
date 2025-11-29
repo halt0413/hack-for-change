@@ -1,0 +1,12 @@
+{
+  "name": "@hack-for-change/common",
+  "version": "1.0.0",
+  "main": "src/index.ts", 
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "echo 'No build'"
+  },
+  "dependencies": {
+    "zod": "^3.23.0"
+  }
+}
