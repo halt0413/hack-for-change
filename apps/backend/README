@@ -1,0 +1,8 @@
+マイグレーション生成
+
+pnpm drizzle-kit generate
+
+
+反映
+
+pnpm drizzle-kit push
