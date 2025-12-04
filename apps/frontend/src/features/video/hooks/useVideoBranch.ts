@@ -21,7 +21,6 @@ export const useVideoBranch = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const handleEnded = () => {
-    // 再生終了時にその場で選択肢を重ねて表示
     setShowChoices(true);
   };
 
