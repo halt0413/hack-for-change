@@ -5,4 +5,4 @@ const VideoPage: NextPage = () => {
   return <VideoContainer />;
 }
 
-export default VideoPage;       
+export default VideoPage;

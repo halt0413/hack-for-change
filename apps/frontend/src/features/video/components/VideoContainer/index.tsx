@@ -4,21 +4,23 @@ import { VideoLayout } from "../VideoLayout";
 import { useVideoBranch } from "../../hooks/useVideoBranch";
 
 export const VideoContainer = () => {
-  const {
-    videoRef,
-    src,
-    showChoices,
-    handleEnded,
-    handleSelectOption,
-  } = useVideoBranch();
+    const {
+        videoRef,
+        src,
+        showChoices,
+        handleEnded,
+        handleSelectOption,
+        handleStart,
+        isMuted
+    } = useVideoBranch();
 
-  return (
-    <main className="min-h-screen bg-black">
-      <VideoLayout
-        videoRef={videoRef}
-        src={src}
-        onEnded={handleEnded}
-      />
-    </main>
-  );
+    return (
+        <VideoLayout
+            videoRef={videoRef}
+            src={src}
+            onEnded={handleEnded}
+            onStart={handleStart}
+            isMuted={isMuted}
+        />
+    );
 };
