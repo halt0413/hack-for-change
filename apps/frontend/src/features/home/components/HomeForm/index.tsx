@@ -1,11 +1,8 @@
 "use client";
 
-type Props = {
-  onStart: () => void;
-  onOpenWeb: () => void;
-};
+import { HomeHandlers } from "../../types";
 
-export const HomeForm = ({ onStart, onOpenWeb }: Props) => {
+export const HomeForm = ({ onStart, onOpenWeb }: HomeHandlers) => {
   return (
     <div className="flex flex-col items-center gap-6">
       <button
