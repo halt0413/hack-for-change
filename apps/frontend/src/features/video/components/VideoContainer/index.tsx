@@ -1,26 +1,36 @@
 "use client";
 
 import { VideoLayout } from "../VideoLayout";
-import { useVideoBranch } from "../../hooks/useVideoBranch";
+import { BranchChoiceOverlay } from "../ VideoChoiceOverlay";
+import { useVideoBranch } from "../../hooks/useVideoBranch";  
 
 export const VideoContainer = () => {
-    const {
-        videoRef,
-        src,
-        showChoices,
-        handleEnded,
-        handleSelectOption,
-        handleStart,
-        isMuted
-    } = useVideoBranch();
+  const {
+    videoRef,
+    src,
+    showChoices,
+    showOverlay,
+    isMuted,
+    handleEnded,
+    handleStart,
+    handleSelectOption,
+  } = useVideoBranch();
 
-    return (
-        <VideoLayout
-            videoRef={videoRef}
-            src={src}
-            onEnded={handleEnded}
-            onStart={handleStart}
-            isMuted={isMuted}
-        />
-    );
+  return (
+    <>
+      <VideoLayout
+        src={src}
+        videoRef={videoRef}
+        onEnded={handleEnded}
+        onStart={handleStart}
+        isMuted={isMuted}
+        showOverlay={showOverlay}
+      />
+      <BranchChoiceOverlay 
+        visible={showChoices} 
+        onSelect={handleSelectOption} 
+        questionText="あなたは空のペットボトルを持っていました"
+      />
+    </>
+  );
 };
