@@ -1,9 +1,13 @@
 import { Hono } from 'hono'
 import { serve } from '@hono/node-server'
+import stripeRouter  from './router/stripeRouter'
+import stripeWebhook from './stripe/webhook/stripe'
 
 const app = new Hono()
 
-app.get("/", (c) => c.text('Hono'))
+app.route("/stripe", stripeRouter)
+
+app.route("/webhook/stripe", stripeWebhook);
 
 serve({
     fetch: app.fetch,

@@ -1,8 +1,8 @@
-import { pgTable, serial, varchar, integer } from "drizzle-orm/pg-core"
+import { pgTable, varchar, integer, uuid, timestamp } from "drizzle-orm/pg-core"
 
-//サンプル
-// export const items = pgTable("items", {
-//   id: serial("id").primaryKey(),
-//   name: varchar("name").notNull(),
-//   price: integer("price").notNull(),
-// })
+export const charity = pgTable("charity", {
+    id: uuid("id").defaultRandom().primaryKey(),
+    donor_name: varchar("donor_name").notNull(),
+    price: integer("price").notNull(),
+    create_at: timestamp("create_at").defaultNow().notNull(),
+})
