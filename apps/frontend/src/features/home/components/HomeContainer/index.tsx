@@ -20,7 +20,7 @@ export const HomeContainer = () => {
 					</h2>
 
 					<a
-						href="#"
+						href="/video"
 						className="mt-10 inline-flex items-center gap-4 text-white bg-[#628ff5] px-10 py-5 rounded-2xl text-[32px] font-bold shadow hover:bg-[#628ff5]/80 transition"
 					>
 						体感する
