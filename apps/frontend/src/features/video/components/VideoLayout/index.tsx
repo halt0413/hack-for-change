@@ -1,13 +1,12 @@
 "use client";
 
-import { useState } from "react";
-
 type Props = {
     src: string;
     onEnded: () => void;
     videoRef: React.RefObject<HTMLVideoElement | null>;
     onStart: () => void;
     isMuted: boolean;
+    showOverlay: boolean;
 };
 
 export const VideoLayout = ({
@@ -16,14 +15,8 @@ export const VideoLayout = ({
     videoRef,
     onStart,
     isMuted,
+    showOverlay,
 }: Props) => {
-    const [showOverlay, setShowOverlay] = useState(true);
-
-    const handleStart = () => {
-        setShowOverlay(false);
-        onStart();
-    };
-
     return (
         <div className="fixed inset-0 bg-black overflow-hidden">
             <video
@@ -38,7 +31,7 @@ export const VideoLayout = ({
             {showOverlay && (
                 <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
                     <button
-                        onClick={handleStart}
+                        onClick={onStart}
                         aria-label="再生"
                         className="pointer-events-auto flex items-center justify-center rounded-full bg-white/90 p-6 text-black shadow-xl transition hover:scale-105 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/70"
                     >

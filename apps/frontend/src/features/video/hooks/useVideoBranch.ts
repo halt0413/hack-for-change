@@ -6,8 +6,8 @@ import { BranchOption, VideoId } from "../types";
 
 const videoSources = [
     { id: "OP", src: "/OP.mp4" },
-    { id: "optionA", src: "" },
-    { id: "optionB", src: "" },
+    { id: "ED1", src: "/ED1.mp4" },
+    { id: "ED2", src: "/ED2.mp4" },
 ] satisfies Array<{ id: VideoId; src: string }>;
 
 const videoSourceMap = Object.fromEntries(
@@ -23,39 +23,36 @@ export const useVideoBranch = () => {
     const videoRef = useRef<HTMLVideoElement | null>(null);
 
     const handleEnded = () => {
-        setShowChoices(false);
+        const isOpening = currentVideoId === "OP";
+        setShowChoices(isOpening);
     };
 
     const handleSelectOption = (option: BranchOption) => {
-        const next: VideoId = option === "A" ? "optionA" : "optionB";
+        const next: VideoId = option === "1" ? "ED1" : "ED2";
         setCurrentVideoId(next);
         setShowChoices(false);
     };
 
-    const handleStart = async () => {
+    const handleStart = () => {
         setIsMuted(false);
         setHasStarted(true);
-        try {
-            await videoRef.current?.play();
-        } catch (error) {
-            console.error(error);
-        }
     }
 
     useEffect(() => {
         const video = videoRef.current;
         const src = videoSourceMap[currentVideoId];
-        if (!video || !src) return;
+        if (!video || !src || !hasStarted) return;
         video.currentTime = 0;
-        if (hasStarted) {
-            video.play().catch(() => { });
-        }
+        video.play().catch((error) => {
+            console.error(error);
+        });
     }, [currentVideoId, hasStarted]);
 
     return {
         videoRef,
         src: videoSourceMap[currentVideoId],
         showChoices,
+        showOverlay: !hasStarted,
         handleEnded,
         handleSelectOption,
         handleStart,
