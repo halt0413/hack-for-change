@@ -2,17 +2,33 @@
 
 import Image from "next/image";
 import type { CSSProperties } from "react";
+import { useState } from "react";
 
 type Props = {
   onAnswer?: () => void;
 };
 
+type Feedback = { label: string; correct: boolean } | null;
+
 export const WebProblem = ({ onAnswer }: Props) => {
+  const [feedback, setFeedback] = useState<Feedback>(null);
+
   const waveMaskStyle: CSSProperties = {
     ["--mask" as string]:
       "radial-gradient(33.6px at 50% 47px, #000 99%, #0000 101%) calc(50% - 40px) 0/80px 100% repeat-x, radial-gradient(33.6px at 50% -27px, #0000 99%, #000 101%) 50% 20px/80px calc(100% - 20px) repeat-x",
     WebkitMask: "var(--mask)",
     mask: "var(--mask)",
+  };
+
+  const handleClick = (label: string) => {
+    const isCorrect = label === "どっちも";
+    setFeedback({ label, correct: isCorrect });
+  };
+
+  const closeModal = () => setFeedback(null);
+  const proceed = () => {
+    closeModal();
+    onAnswer?.();
   };
 
   return (
@@ -49,13 +65,13 @@ export const WebProblem = ({ onAnswer }: Props) => {
           </div>
 
           {/* 答えボタン */}
-          <div className="flex justify-end pt-10 gap-4">
+          <div className="flex justify-center pt-10 gap-6">
             {["生態", "人体", "どっちも"].map((label) => (
               <button
                 key={label}
                 type="button"
-                onClick={onAnswer}
-                className="px-6 py-3 rounded-2xl bg-red-500 text-white text-lg font-bold shadow-md hover:bg-red-600 active:bg-red-700 transition"
+                onClick={() => handleClick(label)}
+                className="px-10 py-4 rounded-3xl bg-red-500 text-white text-2xl font-extrabold shadow-lg hover:bg-red-600 active:bg-red-700 transition"
               >
                 {label}
               </button>
@@ -63,6 +79,47 @@ export const WebProblem = ({ onAnswer }: Props) => {
           </div>
         </div>
       </section>
+
+      {feedback && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          onClick={closeModal}
+        >
+          {feedback.correct ? (
+            <div
+              className="bg-white text-slate-900 rounded-2xl px-8 py-10 shadow-2xl w-[360px] max-w-[90vw] text-center relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={closeModal}
+                className="absolute top-3 right-3 text-2xl font-bold text-slate-500 hover:text-slate-700"
+                aria-label="閉じる"
+              >
+                ×
+              </button>
+            <div className="text-6xl text-green-500 mb-4">◯</div>
+              <p className="text-2xl font-bold mb-6">正解！</p>
+            </div>
+          ) : (
+            <div
+              className="bg-white text-slate-900 rounded-2xl px-8 py-10 shadow-2xl w-[320px] max-w-[90vw] text-center relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={closeModal}
+                className="absolute top-3 right-3 text-2xl font-bold text-slate-500 hover:text-slate-700"
+                aria-label="閉じる"
+              >
+                ×
+              </button>
+              <div className="text-6xl text-red-500 mb-4">×</div>
+              <p className="text-xl font-bold">{feedback.label} はちがうよ</p>
+            </div>
+          )}
+        </div>
+      )}
     </main>
   );
 }
