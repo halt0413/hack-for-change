@@ -1,9 +1,7 @@
 import type { NextPage } from "next";
 
-import { Web1Container } from '../../features/web/components/WebContainer';
+import { WebContainer } from "../../features/web/components/WebContainer";
 
-const WebPage: NextPage = () => {
-    return <Web1Container />;
-}
+const WebPage: NextPage = () => <WebContainer />;
 
 export default WebPage;
