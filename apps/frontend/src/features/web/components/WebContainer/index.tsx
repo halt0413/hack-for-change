@@ -1,11 +1,12 @@
 "use client";
 
-import WebProblem from "../WebProblem";
+import { WebProblem } from "../WebProblem";
+import { WebInfluence } from "../WebInfluence";
 import { Weblastic } from "../Webplastic";
 
 export const WebContainer = () => {
   return (
-    <div className="bg-gradient-to-b from-white via-sky-50 to-white text-sky-900">
+    <div className="bg-gradient-to-b from-white via-sky-100 via-sky-200 via-sky-300 to-sky-500 text-sky-900">
       <section className="w-full min-h-screen">
         <Weblastic />
       </section>
@@ -13,6 +14,10 @@ export const WebContainer = () => {
       <section className="w-full min-h-screen">
         <WebProblem />
       </section>
+
+      <section className="w-full min-h-screen">
+        <WebInfluence />
+      </section>
     </div>
   );
-};
+}
