@@ -4,10 +4,12 @@ import { WebProblem } from "../WebProblem";
 import { WebInfluence } from "../WebInfluence";
 import { Weblastic } from "../Webplastic";
 import { WebActions } from "../WebActions";
+import { WebDonation } from "../WebDonation";
 
 export const WebContainer = () => {
   return (
     <div className="bg-gradient-to-b from-white via-sky-100 via-sky-200 via-sky-300 to-sky-500 text-sky-900">
+
       <section className="w-full min-h-screen">
         <Weblastic />
       </section>
@@ -22,6 +24,10 @@ export const WebContainer = () => {
 
       <section className="w-full min-h-screen">
         <WebActions />
+      </section>
+      
+      <section className="w-full min-h-screen">
+        <WebDonation />
       </section>
     </div>
   );
