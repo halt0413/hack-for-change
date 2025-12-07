@@ -37,7 +37,7 @@ export const WebProblem = ({ onAnswer }: Props) => {
             </div>
 
             {/* ゴミアイコン */}
-            <div className="w-14 h-14 md:ml-6 rounded-full bg-sky-300/70 flex items-center justify-center overflow-hidden shadow">
+            <div className="w-14 h-14 md:ml-6 rounded-full flex items-center justify-center">
               <Image
                 src="/gomi.png"
                 alt="ごみのアイコン"
