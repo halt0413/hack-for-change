@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { BranchOption, VideoId } from "../types";
+import { useRouter } from "next/navigation";
 
 const videoSources = [
     { id: "OP", src: "/OP.mp4" },
@@ -19,18 +20,37 @@ export const useVideoBranch = () => {
     const [showChoices, setShowChoices] = useState(false);
     const [isMuted, setIsMuted] = useState(true);
     const [hasStarted, setHasStarted] = useState(false);
+    const [showFinish, setShowFinish] = useState(false);
 
     const videoRef = useRef<HTMLVideoElement | null>(null);
+    const router = useRouter();
 
     const handleEnded = () => {
         const isOpening = currentVideoId === "OP";
+        const isEnding = currentVideoId === "ED1" || currentVideoId === "ED2";
         setShowChoices(isOpening);
+        if (isEnding) {
+            setShowFinish(true);
+        }
     };
 
     const handleSelectOption = (option: BranchOption) => {
         const next: VideoId = option === "1" ? "ED1" : "ED2";
         setCurrentVideoId(next);
         setShowChoices(false);
+        setShowFinish(false);
+    };
+
+    const handleSelectFinish = (option: BranchOption) => {
+        if (option === "1") {
+            // もう一度見る: 反対のEDに移動
+            const nextVideoId: VideoId = currentVideoId === "ED1" ? "ED2" : "ED1";
+            setCurrentVideoId(nextVideoId);
+            setShowFinish(false);
+        } else {
+            // ホームに行く
+            router.push("/web");
+        }
     };
 
     const handleStart = () => {
@@ -57,5 +77,7 @@ export const useVideoBranch = () => {
         handleSelectOption,
         handleStart,
         isMuted,
+        showFinish,
+        handleSelectFinish,
     };
 };
