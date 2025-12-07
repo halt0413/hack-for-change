@@ -29,8 +29,8 @@ export const stripeService = {
             donor_name: donor_name,
             price: price.toString(),
         },
-        success_url: "http://localhost:3000/success",
-        cancel_url: "http://localhost:3000/cancel",
+        success_url: "http://localhost:3000/web",
+        cancel_url: "http://localhost:3000/web",
     })
 
     return session.url // ← フロントが飛ぶURL

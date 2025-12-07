@@ -5,6 +5,36 @@
 import Image from "next/image";
 
 export const WebDonation = () => {
+
+  const handleDonate = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/stripe/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // donor_name: "橋本剛志",
+          // price: 300, // 例: 300円
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("寄付APIの呼び出しに失敗しました");
+      }
+
+      const data = await response.json();
+      console.log("レスポンス:", data);
+
+      // 必要ならリダイレクトや決済ページに遷移など
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <main className="relative min-h-screen bg-[#1f3c68] text-white flex items-center justify-center overflow-hidden">
       <div className="w-full max-w-5xl px-6 py-16 text-center space-y-12 z-10">
@@ -27,6 +57,7 @@ export const WebDonation = () => {
 
           <button
             type="button"
+            onClick={handleDonate}
             className="mt-4 inline-block bg-[#fbc100] text-[#1f3c68] text-2xl md:text-3xl font-bold px-10 py-4 rounded-full shadow-lg hover:scale-[1.02] active:scale-[0.99] transition-transform"
           >
             ここから寄付する
