@@ -3,6 +3,7 @@
 import { WebProblem } from "../WebProblem";
 import { WebInfluence } from "../WebInfluence";
 import { Weblastic } from "../Webplastic";
+import { WebActions } from "../WebActions";
 
 export const WebContainer = () => {
   return (
@@ -17,6 +18,10 @@ export const WebContainer = () => {
 
       <section className="w-full min-h-screen">
         <WebInfluence />
+      </section>
+
+      <section className="w-full min-h-screen">
+        <WebActions />
       </section>
     </div>
   );
