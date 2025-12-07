@@ -38,14 +38,14 @@ export const BranchChoiceOverlay = ({ visible, onSelect, questionText }: Props) 
           <li>
             <BranchChoiceButton
               option="1"
-              label="その場に捨てる"
+              label="持ち帰る"
               onSelect={onSelect}
             />
           </li>
           <li>
             <BranchChoiceButton
               option="2"
-              label="持ち帰る"
+              label="その場に捨てる"
               onSelect={onSelect}
             />
           </li>
